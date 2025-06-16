@@ -1,0 +1,45 @@
+# Node.js
+node_modules/
+npm-debug.log
+.npm/
+.yarn-cache/
+.pnp/
+.pnp.cjs
+
+# TypeScript compilation outputs
+# Adjust 'dist/' or 'build/' or 'out/' based on your tsconfig.json output
+dist/
+build/
+out/
+*.js
+*.js.map
+*.d.ts # D.ts files are often committed if they are part of a library's public API, but for internal test code, you might ignore them.
+
+# Playwright
+# Playwright test results and artifacts
+test-results/
+playwright-report/
+.cache/ms-playwright/ # Playwright browser binaries cache
+
+# Environment variables
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+
+# IDE-specific files
+.vscode/ # VS Code settings and launch configurations (consider what you want to share)
+.idea/   # IntelliJ/WebStorm specific files
+*.iml
+.cursor/
+.cursor/workspace.json
+
+# OS generated files
+Thumbs.db
+
+# Other common ignores
+*.log
+.eslintcache
+.nyc_output/
+coverage/
