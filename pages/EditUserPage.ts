@@ -7,10 +7,10 @@ export class EditUserPage extends BasePage {
     }
 
     readonly updateButton = this.page.locator('//button[@data-testId="button-Update"]');
-    readonly inputUserName = this.page.locator('#inputUserName');
+    readonly userNameInput = this.page.locator('#inputUserName');
 
     async enterUserName(userName: string): Promise<void> {
-        await this.inputUserName.fill(userName);
+        await this.userNameInput.fill(userName);
       }
 
       async clickUpdateButton(): Promise<void> {

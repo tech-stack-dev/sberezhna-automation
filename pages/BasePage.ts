@@ -14,4 +14,13 @@ export class BasePage {
     async verifyPageTitle(title: string | RegExp): Promise<void> {
         await expect(this.page).toHaveTitle(title);
       }
+
+      async verifyPageUrl(urlPart: string | RegExp): Promise<void> {
+        if (typeof urlPart === 'string') {
+          const dynamicRegExp = new RegExp(urlPart);
+          await expect(this.page).toHaveURL(dynamicRegExp);
+        } else {
+          await expect(this.page).toHaveURL(urlPart);
+        }
+      }
 }
