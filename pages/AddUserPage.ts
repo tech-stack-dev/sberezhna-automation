@@ -11,6 +11,8 @@ export class AddUserPage extends BasePage {
     readonly yearOfBirthInput = this.page.locator('#inputYearOfBirth');
     readonly createButton = this.page.locator('//button[@data-testId="button-Create"]');
     readonly cancelButton = this.page.locator('//button[@data-testId="button-Cancel"]');
+    readonly userNameInputValidationError = this.page.locator('//span[@data-testId="inputError-UserName"]');
+    readonly yearOfBirthInputValidationError = this.page.locator('#inputYearOfBirth-error');
 
     async navigateTo(): Promise<void> {
       await this.goto('https://traineeautomation.azurewebsites.net/Forms/AddUser');
