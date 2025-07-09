@@ -3,29 +3,28 @@ import { HomePage } from '../pages/HomePage';
 import { AddUserPage } from '../pages/AddUserPage';
 import { faker } from '@faker-js/faker';
 
+
 test('Add new user with all fields' , async ({page}) => {
     const currentYear: number = new Date().getFullYear();
     const yearForAdult: number = currentYear - 20;
     const firstName: string = faker.person.firstName();
+    const gender = 'Male';
 
     const homePage = new HomePage(page);
     const addUserPage = new AddUserPage(page);
 
     await addUserPage.navigateTo();
-    await addUserPage.selectGender('Male');
+    await addUserPage.selectGender(gender);
     await addUserPage.enterUserName(firstName);
     await addUserPage.enterYearOfBirth(yearForAdult.toString());
     await addUserPage.clickCreateButton();
     
-    const newlyCreatedUser = page.getByText(firstName);
-    await expect(newlyCreatedUser).toBeVisible();
+    
+    await expect(await homePage.getUserByName(firstName)).toBeVisible();
+    await expect(await homePage.getUserYearOfBirthByName(firstName)).toHaveText(yearForAdult.toString());
+    await expect(await homePage.getUserGenderByName(firstName)).toHaveText(gender);
 
-    const userYearOfBirth = newlyCreatedUser.locator('+ td');
-    const parentRow = newlyCreatedUser.locator('xpath=..');
-    const userGender = parentRow.locator('[data-testid="td-Gender"]');
-  
-    await expect(userYearOfBirth).toHaveText(yearForAdult.toString());
-    await expect(userGender).toHaveText('Male');
+    homePage.deleteUserByName(firstName);
     });
 
 test('Name is required' , async ({page}) => {
@@ -63,6 +62,8 @@ test('Not valid Year of Birth is set' , async ({page}) => {
         
     await expect(addUserPage.yearOfBirthInputValidationError).toHaveText('Not valid Year of Birth is set');
     });
+    
+
 
     function generateRandomString(length: number): string {
         const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

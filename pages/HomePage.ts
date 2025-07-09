@@ -1,5 +1,6 @@
-import { Page } from '@playwright/test';
+import { Page, Locator } from '@playwright/test';
 import { BasePage } from './BasePage';
+import { DeleteUserConfirmationPage } from '../pages/DeleteUserConfirmationPage';
 
 export class HomePage extends BasePage {
     constructor(page: Page) {
@@ -21,5 +22,30 @@ async clickEditButton(): Promise<void> {
 
   async clickDeleteButton(): Promise<void> {
     await this.deleteButton.first().click();
+  }
+
+  async getUserByName(name: string): Promise<Locator> {
+    return this.page.getByText(name);
+  }
+
+  async getUserYearOfBirthByName(name: string): Promise<Locator> {
+    const nameOfNewlyCreatedUser = await this.getUserByName(name);
+    return nameOfNewlyCreatedUser.locator('+ td');
+  }
+
+  async getUserGenderByName(name: string): Promise<Locator> {
+    const nameOfNewlyCreatedUser = await this.getUserByName(name);
+    const userRow = nameOfNewlyCreatedUser.locator('xpath=..');
+    return userRow.locator('[data-testid="td-Gender"]');
+  }
+
+  async deleteUserByName(name: string): Promise<void> {
+    const userCell = await this.getUserByName(name);
+    const userRow = userCell.locator('xpath=..');
+    const deleteBtn = userRow.locator('[data-testid="button-Delete"]');
+    await deleteBtn.click();
+
+    const deleteUserConfirmationPage = new DeleteUserConfirmationPage(this.page);
+    await deleteUserConfirmationPage.confirmDeleting();
   }
 }
