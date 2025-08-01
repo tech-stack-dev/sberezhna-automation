@@ -32,7 +32,7 @@ test('Name is required' , async ({page}) => {
     await addUserPage.navigateTo();
     await addUserPage.clickCreateButton();
 
-    await expect(addUserPage.userNameInputValidationError).toHaveText('Name is requiredt');
+    await expect(addUserPage.userNameInputValidationError).toHaveText('Name is requried');
     });
 
 test('Name is too short' , async ({page}) => {
