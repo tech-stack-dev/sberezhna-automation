@@ -13,6 +13,8 @@ export default defineConfig({
 
   testIgnore: '**/utils/**',
 
+  timeout: 30_000,
+
   /* Run tests in files in parallel */
   fullyParallel: true,
 
@@ -31,6 +33,7 @@ export default defineConfig({
   /* Configure projects for major browsers */
   /* See https://playwright.dev/docs/api/class-testoptions. */
   use: {
+    navigationTimeout: 5_000,
     
     // baseURL: process.env.BASE_URL,
 
@@ -38,12 +41,12 @@ export default defineConfig({
     
     /* Do screenshot if test fails. */
     screenshot: 'only-on-failure',
-
+    video: 'retain-on-failure',
     /* Run browser in non-headless mode */
     headless: false, // true by default
 
     /* Browser window size */
-    // viewport: { width: 1280, height: 720 },
+   //viewport: { width: 1280, height: 720 },
 
     // locale: 'en-US',
     // timezoneId: 'America/Los_Angeles',
