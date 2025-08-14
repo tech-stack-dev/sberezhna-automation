@@ -36,7 +36,7 @@ export default defineConfig({
     navigationTimeout: 5_000,
     
     // baseURL: process.env.BASE_URL,
-
+    baseURL: 'https://traineeautomation.azurewebsites.net/api',
     trace: 'on-first-retry', // 'off', 'on', 'retain-on-failure'
     
     /* Do screenshot if test fails. */
