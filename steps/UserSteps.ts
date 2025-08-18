@@ -1,14 +1,14 @@
-import { APIRequestContext } from '@playwright/test';
+import { APIRequestContext, APIResponse } from '@playwright/test';
 import { UserDTO } from '../dto/UserDTO';
 
 export class UserSteps {
-  createdUser!: UserDTO;
+  createdUser?: UserDTO;
 
-  async createUser(apiContext: APIRequestContext, name: string, yearOfBirth: number, gender: number) {
-    this.createdUser = new UserDTO(name, yearOfBirth, gender);
+  async createUser(apiContext: APIRequestContext, user: UserDTO): Promise<APIResponse> {
+    this.createdUser = user;
 
     const response = await apiContext.post('User', {
-      data: this.createdUser
+      data: user,
     });
 
     return response;

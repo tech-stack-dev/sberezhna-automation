@@ -1,6 +1,7 @@
 import { test, expect, request, APIRequestContext, APIResponse } from '@playwright/test';
 import { HomePage } from '../pages/HomePage';
 import { EditUserPage } from '../pages/EditUserPage';
+import { UserDTO } from '../dto/UserDTO';
 import { UserSteps } from '../steps/UserSteps';
 import { faker } from '@faker-js/faker';
 
@@ -12,7 +13,6 @@ test.describe('User API', () => {
   const currentYear: number = new Date().getFullYear();
   const yearForAdult: number = currentYear - 20;
   const firstName: string = faker.person.firstName();
-  const gender = 1;
 
   test.beforeAll(async () => {
     apiContext = await request.newContext({
@@ -27,7 +27,12 @@ test.describe('User API', () => {
   });
 
   test.beforeEach(async () => {
-    createResponse = await userSteps.createUser(apiContext, firstName, yearForAdult, gender);
+    const user: UserDTO = {
+      name: firstName,
+      yearOfBirth: yearForAdult,
+      gender: 1,
+    };
+    createResponse = await userSteps.createUser(apiContext, user);
   });
 
   test.afterEach(async () => {
