@@ -1,4 +1,4 @@
-import { Page, Locator } from '@playwright/test';
+import { Page } from '@playwright/test';
 import { BasePage } from './BasePage';
 
 export class DeleteUserConfirmationPage extends BasePage {
@@ -6,14 +6,11 @@ export class DeleteUserConfirmationPage extends BasePage {
     super(page);
   }
 
-  readonly yesButton = this.page.locator('//button[@data-testid="button-Yes"]');
-  readonly cancelButton = this.page.locator('//button[@data-testid="button-Cancel"]');
-
   async confirmDeleting(): Promise<void> {
-    await this.yesButton.click();
+    await this.page.getByTestId('button-Yes').click();
   }
 
   async cancelDeleting(): Promise<void> {
-    await this.cancelButton.click();
+    await this.page.getByTestId('button-Cancel').click();
   }
 }

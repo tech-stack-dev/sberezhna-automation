@@ -6,11 +6,6 @@ export class AddUserPage extends BasePage {
     super(page);
   }
 
-  readonly genderDropdown = this.page.locator('#selectGender');
-  readonly userNameInput = this.page.locator('#inputUserName');
-  readonly yearOfBirthInput = this.page.locator('#inputYearOfBirth');
-  readonly createButton = this.page.locator('//button[@data-testId="button-Create"]');
-  readonly cancelButton = this.page.locator('//button[@data-testId="button-Cancel"]');
   readonly userNameInputValidationError = this.page.locator('//span[@data-testId="inputError-UserName"]');
   readonly yearOfBirthInputValidationError = this.page.locator('#inputYearOfBirth-error');
 
@@ -20,22 +15,22 @@ export class AddUserPage extends BasePage {
   }
 
   async enterUserName(userName: string): Promise<void> {
-    await this.userNameInput.fill(userName);
+    await this.page.getByTestId('input-UserName').fill(userName);
   }
 
   async enterYearOfBirth(yearOfBirth: string): Promise<void> {
-    await this.yearOfBirthInput.fill(yearOfBirth);
+    await this.page.getByTestId('input-YearOfBirth').fill(yearOfBirth);
   }
 
   async selectGender(gender: string): Promise<void> {
-    await this.genderDropdown.selectOption(gender);
+    await this.page.getByTestId('select-Gender').selectOption(gender);
   }
 
   async clickCreateButton(): Promise<void> {
-    await this.createButton.click();
+    await this.page.getByTestId('button-Create').click();
   }
 
   async clickCancelButton(): Promise<void> {
-    await this.cancelButton.click();
+    await this.page.getByTestId('button-Cancel').click();
   }
 }

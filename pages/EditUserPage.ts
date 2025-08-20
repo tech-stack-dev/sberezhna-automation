@@ -6,25 +6,11 @@ export class EditUserPage extends BasePage {
     super(page);
   }
 
-  readonly updateButton = this.page.locator('//button[@data-testId="button-Update"]');
-  readonly userNameInput = this.page.locator('#inputUserName');
-  readonly yearOfBirthInput = this.page.locator('#inputYearOfBirth');
-  readonly genderDropdown = this.page.locator('#selectGender');
-
   async enterUserName(userName: string): Promise<void> {
-    await this.userNameInput.fill(userName);
-  }
-
-  async enterUserYearOfBirth(yearOfBirth: number): Promise<void> {
-    await this.yearOfBirthInput.fill('');
-    await this.yearOfBirthInput.fill(String(yearOfBirth));
-  }
-
-  async selectGender(genderLabel: string): Promise<void> {
-    await this.genderDropdown.selectOption({ label: genderLabel });
+    await this.page.getByTestId('input-UserName').fill(userName);
   }
 
   async clickUpdateButton(): Promise<void> {
-    await this.updateButton.click();
+    await this.page.getByTestId('button-Update').click();
   }
 }

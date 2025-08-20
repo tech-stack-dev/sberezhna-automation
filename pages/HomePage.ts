@@ -7,9 +7,7 @@ export class HomePage extends BasePage {
     super(page);
   }
 
-  readonly userNameColumn = this.page.locator('//td[@data-testId="td-UserName"]');
-  readonly editButton = this.page.locator('//a[@data-testid="button-Edit"]');
-  readonly deleteButton = this.page.locator('//a[@data-testid="button-Delete"]');
+readonly userNameColumn = this.page.locator('//td[@data-testId="td-UserName"]');
 
   async navigateTo(): Promise<void> {
     await this.goto('https://traineeautomation.azurewebsites.net/');
@@ -17,11 +15,11 @@ export class HomePage extends BasePage {
   }
 
   async clickEditButton(): Promise<void> {
-    await this.editButton.first().click();
+    await this.page.getByTestId('button-Edit').first().click();
   }
 
   async clickDeleteButton(): Promise<void> {
-    await this.deleteButton.first().click();
+    await this.page.getByTestId('button-Delete').first().click();
   }
 
   async getUserByName(name: string): Promise<Locator> {
