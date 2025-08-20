@@ -3,20 +3,20 @@ import { BasePage } from './BasePage';
 import { DeleteUserConfirmationPage } from '../pages/DeleteUserConfirmationPage';
 
 export class HomePage extends BasePage {
-    constructor(page: Page) {
-      super(page);
-    }
+  constructor(page: Page) {
+    super(page);
+  }
 
-readonly userNameColumn = this.page.locator('//td[@data-testId="td-UserName"]');
-readonly editButton = this.page.locator('//a[@data-testid="button-Edit"]');
-readonly deleteButton = this.page.locator('//a[@data-testid="button-Delete"]');
+  readonly userNameColumn = this.page.locator('//td[@data-testId="td-UserName"]');
+  readonly editButton = this.page.locator('//a[@data-testid="button-Edit"]');
+  readonly deleteButton = this.page.locator('//a[@data-testid="button-Delete"]');
 
-async navigateTo(): Promise<void> {
+  async navigateTo(): Promise<void> {
     await this.goto('https://traineeautomation.azurewebsites.net/');
     await this.verifyPageTitle('TS Trainee course');
   }
 
-async clickEditButton(): Promise<void> {
+  async clickEditButton(): Promise<void> {
     await this.editButton.first().click();
   }
 
@@ -47,5 +47,12 @@ async clickEditButton(): Promise<void> {
 
     const deleteUserConfirmationPage = new DeleteUserConfirmationPage(this.page);
     await deleteUserConfirmationPage.confirmDeleting();
+  }
+
+  async editUserByName(name: string): Promise<void> {
+    const userCell = await this.getUserByName(name);
+    const userRow = userCell.locator('xpath=..');
+    const editBtn = userRow.locator('[data-testid="button-Edit"]');
+    await editBtn.click();
   }
 }
