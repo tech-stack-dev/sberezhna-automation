@@ -14,5 +14,14 @@
   "dependencies": {
     "@faker-js/faker": "^9.9.0",
     "axios": "^1.11.0"
-  }
+  },
+    "name": "my-playwright-project",
+    "version": "1.0.0",
+    "scripts": {
+      "test": "npx playwright test"
+    },
+    "devDependencies": {
+      "@playwright/test": "^1.45.0",
+      "typescript": "^5.0.0"
+    }
 }
