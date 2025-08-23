@@ -48,9 +48,8 @@ readonly userNameColumn = this.page.locator('//td[@data-testId="td-UserName"]');
   }
 
   async editUserByName(name: string): Promise<void> {
-    const userCell = await this.getUserByName(name);
-    const userRow = userCell.locator('xpath=..');
-    const editBtn = userRow.locator('[data-testid="button-Edit"]');
+    const userRow = await this.getUserByName(name);
+    const editBtn = userRow.getByTestId('button-Edit');
     await editBtn.click();
   }
 }
