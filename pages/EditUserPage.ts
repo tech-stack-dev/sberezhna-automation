@@ -7,7 +7,17 @@ export class EditUserPage extends BasePage {
   }
 
   async enterUserName(userName: string): Promise<void> {
+    await this.page.getByTestId('input-UserName').fill('');
     await this.page.getByTestId('input-UserName').fill(userName);
+  }
+
+  async enterUserYearOfBirth(yearOfBirth: number): Promise<void> {
+    await this.page.getByTestId('input-YearOfBirth').fill('');
+    await this.page.getByTestId('input-YearOfBirth').fill(String(yearOfBirth));
+  }
+
+  async selectGender(genderLabel: string): Promise<void> {
+    await this.page.getByTestId('select-Gender').selectOption({ label: genderLabel });
   }
 
   async clickUpdateButton(): Promise<void> {
