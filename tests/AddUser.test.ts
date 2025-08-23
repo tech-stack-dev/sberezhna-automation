@@ -24,7 +24,7 @@ test('Add new user with all fields' , async ({page}) => {
     await expect(await homePage.getUserYearOfBirthByName(firstName)).toHaveText(yearForAdult.toString());
     await expect(await homePage.getUserGenderByName(firstName)).toHaveText(gender);
 
-    homePage.deleteUserByName(firstName);
+    await homePage.deleteUserByName(firstName);
     });
 
 test('Name is required' , async ({page}) => {
