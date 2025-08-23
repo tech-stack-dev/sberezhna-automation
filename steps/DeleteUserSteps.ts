@@ -12,9 +12,8 @@ export class DeleteUserSteps {
     }
 
     async deleteUserByName(name: string): Promise<void> {
-        const userCell = await this.homePage.getUserByName(name);
-        const userRow = userCell.locator('xpath=..');
-        const deleteBtn = userRow.locator('[data-testid="button-Delete"]');
+        const userRow = await this.homePage.getUserByName(name);
+        const deleteBtn = userRow.getByTestId('button-Delete');
         await deleteBtn.click();
 
         await this.deleteUserConfirmationPage.confirmDeleting();
