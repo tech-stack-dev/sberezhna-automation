@@ -1,4 +1,4 @@
-import { Page, Locator } from '@playwright/test';
+import { Page, Locator, expect } from '@playwright/test';
 import { BasePage } from './BasePage';
 import { DeleteUserConfirmationPage } from '../pages/DeleteUserConfirmationPage';
 
@@ -23,24 +23,24 @@ readonly userNameColumn = this.page.locator('//td[@data-testId="td-UserName"]');
   }
 
   async getUserByName(name: string): Promise<Locator> {
-    return this.page.getByText(name);
+    return this.page.locator('table tr').filter({
+      has: this.page.getByText(name)
+    });
   }
 
   async getUserYearOfBirthByName(name: string): Promise<Locator> {
-    const nameOfNewlyCreatedUser = await this.getUserByName(name);
-    return nameOfNewlyCreatedUser.locator('+ td');
+    const userRow = await this.getUserByName(name);
+    return userRow.getByTestId('td-YearOfBirth');
   }
 
   async getUserGenderByName(name: string): Promise<Locator> {
-    const nameOfNewlyCreatedUser = await this.getUserByName(name);
-    const userRow = nameOfNewlyCreatedUser.locator('xpath=..');
-    return userRow.locator('[data-testid="td-Gender"]');
+    const userRow = await this.getUserByName(name);
+    return userRow.getByTestId('td-Gender');
   }
 
   async deleteUserByName(name: string): Promise<void> {
-    const userCell = await this.getUserByName(name);
-    const userRow = userCell.locator('xpath=..');
-    const deleteBtn = userRow.locator('[data-testid="button-Delete"]');
+    const userRow = await this.getUserByName(name);
+    const deleteBtn = userRow.getByTestId('button-Delete');
     await deleteBtn.click();
 
     const deleteUserConfirmationPage = new DeleteUserConfirmationPage(this.page);

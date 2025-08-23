@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('Update user name test, before refactoring' , async ({page}) => {
+test.skip('Skipped because it is example. Update user name test, before refactoring' , async ({page}) => {
 await page.goto('https://traineeautomation.azurewebsites.net/');
 const allEditButtons = page.locator('//a[@data-testid="button-Edit"]');
 const firstEditButton = allEditButtons.first();
