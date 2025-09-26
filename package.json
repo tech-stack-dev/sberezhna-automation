@@ -1,23 +1,26 @@
 {
+  "name": "my-playwright-project",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "npx playwright test"
+  },
   "devDependencies": {
+    "@eslint/js": "^9.36.0",
     "@playwright/test": "^1.53.0",
     "@types/axios": "^0.9.36",
     "@types/node": "^24.0.3",
     "@typescript-eslint/eslint-plugin": "^8.34.0",
     "@typescript-eslint/parser": "^8.34.0",
-    "eslint": "^9.29.0",
+    "eslint": "^9.36.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.4.1",
+    "globals": "^16.4.0",
     "prettier": "^3.5.3",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.44.1"
   },
   "dependencies": {
     "@faker-js/faker": "^9.9.0",
     "axios": "^1.11.0"
-  },
-    "name": "my-playwright-project",
-    "version": "1.0.0",
-    "scripts": {
-      "test": "npx playwright test"
-    }
+  }
 }
