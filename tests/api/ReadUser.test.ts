@@ -7,10 +7,6 @@ test.describe('ReadUser API tests', () => {
 
   test.beforeAll(async () => {
     apiContext = await request.newContext({
-      extraHTTPHeaders: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
     });
   });
 
