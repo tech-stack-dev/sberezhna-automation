@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
-import axios, { AxiosInstance } from 'axios';
+import axios from "axios";
+import type { AxiosInstance } from "axios";
+import { faker } from '@faker-js/faker';
 
 test.describe('User API tests (Axios)', () => {
   let api: AxiosInstance;
@@ -20,6 +22,10 @@ test.describe('User API tests (Axios)', () => {
   });
 
   test('POST /User', async () => {
+    const currentYear: number = new Date().getFullYear();
+    const yearForAdult: number = currentYear - 20;
+    const firstName: string = faker.person.firstName();
+
     const response = await api.post('/User', {
       name: 'Test User',
       yearOfBirth: 2005,
