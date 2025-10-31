@@ -43,7 +43,7 @@ export default defineConfig({
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
     /* Run browser in non-headless mode */
-    headless: false, // true by default
+    headless: true, // true by default
 
     /* Browser window size */
    //viewport: { width: 1280, height: 720 },
